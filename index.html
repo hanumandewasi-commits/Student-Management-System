@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusOS | Student Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">C</span><span>Campus<span class="brand-accent">OS</span></span></div>
+      <p class="eyebrow">Workspace</p>
+      <nav>
+        <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-view="students"><span>♙</span> Students</button>
+        <button class="nav-item admin-only" data-view="insights"><span>◒</span> Insights</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="support-card"><span class="support-icon">?</span><div><strong>Need a hand?</strong><small>Check your access level</small></div></div>
+        <button class="sign-out" id="signOut"><span>↪</span> Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">Monday, 05 September 2026</p><h1 id="pageTitle">Good morning, Admin.</h1></div>
+        <div class="topbar-actions"><button class="icon-button" aria-label="Notifications">♢<i></i></button><div class="profile"><span class="avatar">A</span><span><strong id="roleName">Administrator</strong><small id="roleCaption">Full access</small></span><span class="chevron">⌄</span></div></div>
+      </header>
+
+      <section class="view" id="overviewView">
+        <div class="welcome-row"><div><h2>Student overview</h2><p class="muted">A clear view of your campus, all in one place.</p></div><button class="primary-button admin-only" id="addStudentButton"><span>＋</span> Add student</button></div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-icon coral">♙</div><div><span>Total students</span><strong id="totalStudents">0</strong><small class="trend">↑ 12% <em>vs last term</em></small></div></article>
+          <article class="metric-card"><div class="metric-icon blue">⌁</div><div><span>Average score</span><strong><span id="averageScore">0</span><small class="unit">%</small></strong><small class="trend">↑ 4.8% <em>vs last term</em></small></div></article>
+          <article class="metric-card"><div class="metric-icon yellow">⌖</div><div><span>Active branches</span><strong id="branchCount">0</strong><small class="trend neutral">● All departments</small></div></article>
+        </div>
+        <div class="content-grid"><section class="panel chart-panel"><div class="panel-heading"><div><h3>Performance overview</h3><p class="muted">Average student percentage by branch</p></div><select id="chartFilter"><option>All time</option><option>This year</option></select></div><div class="chart" id="chart"></div></section><section class="panel branch-panel"><div class="panel-heading"><div><h3>Branch distribution</h3><p class="muted">Students by department</p></div></div><div id="branchList" class="branch-list"></div></section></div>
+        <section class="panel recent-panel"><div class="panel-heading"><div><h3>Recent students</h3><p class="muted">The latest records added to the system</p></div><button class="text-button" data-view="students">View all <span>→</span></button></div><div class="table-wrap"><table><thead><tr><th>Student</th><th>Roll number</th><th>Branch</th><th>Score</th><th>Status</th></tr></thead><tbody id="recentStudents"></tbody></table></div></section>
+      </section>
+
+      <section class="view hidden" id="studentsView"><div class="welcome-row"><div><h2>Students</h2><p class="muted">Search, review and manage student records.</p></div><button class="primary-button admin-only" id="addStudentButton2"><span>＋</span> Add student</button></div><section class="panel directory-panel"><div class="directory-toolbar"><div class="search-box"><span>⌕</span><input id="searchInput" placeholder="Search by name, roll number or branch" /></div><select id="branchFilter"><option value="all">All branches</option></select></div><div class="table-wrap"><table><thead><tr><th>Student</th><th>Roll number</th><th>City</th><th>Branch</th><th>Score</th><th></th></tr></thead><tbody id="studentTable"></tbody></table></div></section></section>
+      <section class="view hidden" id="insightsView"><div class="welcome-row"><div><h2>Insights</h2><p class="muted">A quick read on academic performance.</p></div></div><div class="insight-grid" id="insightGrid"></div></section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop"><form class="modal" id="studentForm"><button type="button" class="modal-close" id="closeModal">×</button><p class="eyebrow">Student record</p><h2 id="modalTitle">Add a student</h2><div class="form-grid"><label>Roll number<input name="roll" type="number" required /></label><label>Full name<input name="name" required /></label><label>City<input name="city" required /></label><label>Age<input name="age" type="number" min="15" max="100" required /></label><label>Mobile number<input name="mobile" required /></label><label>Percentage<input name="percentage" type="number" min="0" max="100" step="0.1" required /></label><label class="full">Branch<input name="branch" required /></label></div><button class="primary-button full" type="submit">Save student <span>→</span></button></form></div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
